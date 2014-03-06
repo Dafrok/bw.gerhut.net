@@ -5,10 +5,35 @@
     <title>Multi-B2&W2</title>
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var b2screen = $('img').eq(0);
+            var w2screen = $('img').eq(1);
+
+            function refreshb() {
+                $(b2screen).ready(function () {
+                    b2screen.attr('src', 'http://black.s.gerhut.me/');
+                })
+                setTimeout(refreshb, 100);
+            }
+            function refreshw() {
+                $(w2screen).ready(function () {
+                    w2screen.attr('src', 'http://white.s.gerhut.me/');
+                })
+                setTimeout(refreshw, 100);
+            }
+            function init() {
+                refreshb();
+                refreshw();
+            }
+            init();
+        })
+    </script>
 </head>
 <body>
     <div id="container">
-        <div id="b2"><img id="b2screen" src="http://black.s.gerhut.me/" /></div>
+        <div id="b2"><img src="http://black.s.gerhut.me/" /></div>
         <div id="controlpad">
             <pre id="keyrecord"></pre>
             <div id="keypad">
@@ -53,11 +78,11 @@
             </div>
             <div id="chat">
                 <input />
-                <pre>12312<br />123123u21093u2jr0983j2f083219jd09321jd09321jfd012<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br /></pre>
-                
+                <pre>12312<br />123123u21093u2jr0983j 2f083219jd09321j sd09321jfd012<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br /></pre>
+
             </div>
         </div>
-        <div id="w2"><img id="w2screen" src="http://white.s.gerhut.me/" /></div>
+        <div id="w2"><img src="http://white.s.gerhut.me/" /></div>
         <br class="clear" />
     </div>
 </body>

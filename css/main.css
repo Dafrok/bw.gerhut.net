@@ -22,7 +22,7 @@
         word-wrap:break-word;
     }
 
-    #container > div {
+    #container > div,#container > div img {
         float: left;
         height: 384px;
         width: 256px;
