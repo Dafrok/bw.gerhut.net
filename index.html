@@ -25,7 +25,7 @@
             $('#chat button').click(function () {
                 var message = $('#chat input')
                 if (message.val() != '' && message.val.length <= 40) {
-                    $.get('http://bwinput.s.gerhut.me/chat?name=' + uname + '&content=' + decodeURIComponent(message.val()));
+                    $.get('http://bwinput.s.gerhut.me/chat?name=' + uname + '&content=' + message.val());
                     message.val('');
                 }
             })//发送聊天
@@ -39,7 +39,7 @@
 
             function refreshchat() {
                 $(chatrecord).ready(function () {
-                    chatrecord.load('http://bwinput.s.gerhut.me/chat', function () {  chatrecord.text(chatrecord.text().split('\n').reverse().join('\n')) });
+                    chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))) });
                     
                 })
                 setTimeout(refreshchat, rate);
