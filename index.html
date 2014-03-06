@@ -11,7 +11,7 @@
         $(document).ready(function (data) {
             var uid = 1234567, uname = 'debug';//debug数据
 
-            var rate = 100, gameurl = switchversion(uid);//基本参数
+            var rate = 200, gameurl = switchversion(uid);//基本参数
             var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
 
             function switchversion(uid) {
@@ -22,13 +22,17 @@
                 }
             }//根据uid奇偶切换版本
 
-            $('#chat button').click(function () {
+            function sendkey(keycode){
+                $.get('http://bwinput.s.gerhut.me/input?name=' + uname + '&key=' + keycode);
+            }//发送按钮
+            
+            function sendmessage() {
                 var message = $('#chat input')
                 if (message.val() != '' && message.val.length <= 40) {
                     $.get('http://bwinput.s.gerhut.me/chat?name=' + uname + '&content=' + message.val());
                     message.val('');
                 }
-            })//发送聊天
+            }//发送聊天
 
             function refresh() {
                 $(screen).ready(function () {
@@ -40,7 +44,7 @@
             function refreshchat() {
                 $(chatrecord).ready(function () {
                     chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))) });
-                    
+
                 })
                 setTimeout(refreshchat, rate);
             }//刷新聊天记录
@@ -48,6 +52,15 @@
             function init() {
                 refresh();
                 refreshchat();
+                $('#chat button').click(function () {
+                    sendmessage();
+                })
+                $('#chat input').keypress(function (e) {
+                    if (e.which == 13) sendmessage();
+                })
+                $('#keypad button').click(function () {
+                    sendkey($(this).val())
+                })
             }//入口
 
             init();//调用入口
@@ -63,35 +76,35 @@
                     <tbody>
                         <tr>
                             <td></td>
-                            <td><button onclick="sendkey(87)">↑</button></td>
+                            <td><button value="up">↑</button></td>
                             <td></td>
                             <td></td>
 
                             <td></td>
                             <td></td>
-                            <td><button onclick="sendkey(67)">X</button></td>
+                            <td><button value="X">X</button></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td><button onclick="sendkey(65)">←</button></td>
+                            <td><button value="left">←</button></td>
                             <td></td>
-                            <td><button onclick="sendkey(68)">→</button></td>
+                            <td><button value="right">→</button></td>
                             <td></td>
 
                             <td></td>
-                            <td><button onclick="sendkey(86)">Y</button></td>
+                            <td><button value="Y">Y</button></td>
                             <td></td>
-                            <td><button onclick="sendkey(90)">A</button></td>
+                            <td><button value="A">A</button></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><button onclick="sendkey(83)">↓</button></td>
+                            <td><button value="down">↓</button></td>
                             <td></td>
-                            <td><button onclick="sendkey(70)">始</button></td>
+                            <td><button value="start">始</button></td>
 
-                            <td><button onclick="sendkey(82)">选</button></td>
+                            <td><button value="select">选</button></td>
                             <td></td>
-                            <td><button onclick="sendkey(88)">B</button></td>
+                            <td><button value="B">B</button></td>
                             <td></td>
                         </tr>
                         <tr></tr>
