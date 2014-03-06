@@ -25,7 +25,7 @@
             $('#chat button').click(function () {
                 var message = $('#chat input')
                 if (message.val() != '' && message.val.length <= 40) {
-                    $.get('http://bwinput.s.gerhut.me/chat?name=' + uname + '&content=' + encodeURIComponent(message.val()));
+                    $.get('http://bwinput.s.gerhut.me/chat?name=' + uname + '&content=' + decadeURIComponent(message.val()));
                     message.val('');
                 }
             })//发送聊天
