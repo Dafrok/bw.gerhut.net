@@ -1,8 +1,4 @@
-﻿body {
-    background: linear-gradient(to right,#000,#fff);
-}
-
-#container {
+﻿#container {
     width: 256px;
     margin: 0 auto;
     text-align: center;
@@ -16,6 +12,7 @@
         overflow: auto;
         display: block;
         word-wrap: break-word;
+        
     }
 
     #container > div, #container > div img {
@@ -25,6 +22,7 @@
 
 #controlpad {
     width: 240px;
+    background:white;
     background: linear-gradient(to top,#000,#fff);
 }
 
@@ -33,12 +31,15 @@
 }
 
     #chat input, #chat button {
-        border-bottom: 1px double #eeeeee;
+        border-top: 1px solid #1e1e1e;
+        border-bottom: 1px solid #aaaaaa;
         outline: none;
         background: white;
         line-height: 20px;
         padding: 0;
         text-shadow: 1px 1px 1px gray;
+        
+        color: black;
     }
 
     #chat input {
@@ -49,7 +50,7 @@
     }
 
     #chat button {
-        height: 21px;
+        height: 22px;
         width: 56px;
         border-top-right-radius: 10px;
         cursor: pointer;
@@ -57,15 +58,18 @@
 
         #chat button:hover {
             background: #eeeeee;
+            color: black;
         }
 
     #chat input:hover {
         background: #eeeeee;
+        color: black;
     }
 
 #chatrecord {
     height: 163px;
-    background: linear-gradient(to top,#000,#fff);
+    
+    background: white linear-gradient(to top,#000,#fff);
 }
 
 #keypad {
@@ -87,7 +91,7 @@
         height: 30px;
         border: 1px solid gray;
         border-radius: 15px;
-        background: linear-gradient(to top right,#000,#ddd);
+        background: #ddd linear-gradient(to top right,#000,#ddd);
         color: white;
         outline: none;
         text-shadow: 1px 1px 1px black;
@@ -95,14 +99,15 @@
 
         #keypad button:hover {
             border: 1px solid black;
-            background: linear-gradient(to top right,black,#888);
+            background: black linear-gradient(to top right,black,#888);
         }
 
 
 #keyrecord {
     height: 100px;
-    background: black;
+    border-top:1px dotted black;
     color: silver;
+    background:black;
 }
 
 @media only screen and (min-width: 514px) {
@@ -111,6 +116,6 @@
     }
 
     #container {
-        width:512px;
+        width: 512px;
     }
 }

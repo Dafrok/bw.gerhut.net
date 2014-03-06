@@ -9,29 +9,54 @@
     <script src="js/jquery.min.js"></script>
     <script>
         $(document).ready(function (data) {
-            /*debug*/
-            var uid = 12345678,uname = 'debug';
-            /*debug*/
-            var rate = 100;
-            var screen = $('img').eq(0);
+            var uid = 1234567, uname = 'debug';//debug数据
+
+            var rate = 100, gameurl = switchversion(uid);//基本参数
+            var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
+
+            function switchversion(uid) {
+                switch (uid % 2) {
+                    case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
+                    case 1: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
+                    default: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
+                }
+            }//根据uid奇偶切换版本
+
+            $('#chat button').click(function () {
+                var message = $('#chat input')
+                if (message.val() != '' && message.val.length <= 40) {
+                    $.get('http://bwinput.s.gerhut.me/chat?name=' + uname + '&content=' + encodeURIComponent(message.val()));
+                    message.val('');
+                }
+            })//发送聊天
 
             function refresh() {
                 $(screen).ready(function () {
-                    screen.attr('src', 'http://black.s.gerhut.me/');
+                    screen.attr('src', gameurl);
                 })
                 setTimeout(refresh, rate);
-            }
+            }//刷新游戏屏幕
+
+            function refreshchat() {
+                $(chatrecord).ready(function () {
+                    chatrecord.load('http://bwinput.s.gerhut.me/chat', function () {  chatrecord.text(chatrecord.text().split('\n').reverse().join('\n')) });
+                    
+                })
+                setTimeout(refreshchat, rate);
+            }//刷新聊天记录
 
             function init() {
                 refresh();
-            }
-            init();
+                refreshchat();
+            }//入口
+
+            init();//调用入口
         })
     </script>
 </head>
 <body>
     <div id="container">
-        <div id="screen"><img src="http://black.s.gerhut.me/" /></div>
+        <div id="screen"><img src="/images/default.png" /></div>
         <div id="controlpad">
             <div id="keypad">
                 <table>
@@ -73,17 +98,19 @@
                     </tbody>
                 </table>
             </div>
-
-
             <div id="chat">
                 <input /><button>send</button>
-                <pre id="chatrecord">12312<br />12312<br />12312<br />12312<br />123123u21093u2jr0983j 2f083219jd09321j sd09321jfd012<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br /></pre>
-                <pre id="keyrecord">
-1232132112312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />12312<br />
-</pre>
+                <pre id="chatrecord"></pre>
+
+                <pre id="keyrecord"></pre>
             </div>
+
+
+
+
+
         </div>
-        <br style="clear:both"/>
+        <br style="clear:both" />
     </div>
 </body>
 </html>
