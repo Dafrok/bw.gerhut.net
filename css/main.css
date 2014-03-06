@@ -38,7 +38,7 @@
         background: white;
         line-height: 20px;
         padding: 0;
-        text-shadow:1px 1px 1px gray;
+        text-shadow: 1px 1px 1px gray;
     }
 
     #chat input {
@@ -59,9 +59,9 @@
             background: #eeeeee;
         }
 
-        #chat input:hover {
-            background: #eeeeee;
-        }
+    #chat input:hover {
+        background: #eeeeee;
+    }
 
 #chatrecord {
     height: 163px;
@@ -90,7 +90,7 @@
         background: linear-gradient(to top right,#000,#ddd);
         color: white;
         outline: none;
-        text-shadow:1px 1px 1px black;
+        text-shadow: 1px 1px 1px black;
     }
 
         #keypad button:hover {
@@ -103,4 +103,14 @@
     height: 100px;
     background: black;
     color: silver;
+}
+
+@media only screen and (min-width: 514px) {
+    #container > div {
+        float: left;
+    }
+
+    #container {
+        width:512px;
+    }
 }
