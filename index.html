@@ -24,7 +24,7 @@
 
             function sendkey(keycode){
                 $.get('http://bwinput.s.gerhut.me/input?name=' + uname + '&key=' + keycode);
-            }//发送按钮
+            }//发送按键
             
             function sendmessage() {
                 var message = $('#chat input')
@@ -48,10 +48,17 @@
                 })
                 setTimeout(refreshchat, rate);
             }//刷新聊天记录
+            function refreshkey() {
+                $(keyrecord).ready(function () {
+                    keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))) });
+                })
+                setTimeout(refreshchat, rate);
+            }//刷新按键记录
 
             function init() {
                 refresh();
                 refreshchat();
+                refreshkey();
                 $('#chat button').click(function () {
                     sendmessage();
                 })
