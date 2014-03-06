@@ -92,7 +92,7 @@
         height: 30px;
         border: 1px solid gray;
         border-radius: 15px;
-        background: #ddd linear-gradient(to top right,#000,#ddd);
+        background: #1e1e1e linear-gradient(to top right,#000,#ddd);
         color: white;
         outline: none;
         text-shadow: 1px 1px 1px black;
