@@ -14,6 +14,7 @@
 
             var rate = 200, gameurl = switchversion(uid);//基本参数
             var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
+            var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
 
             function switchversion(uid) {
                 switch (uid % 2) {
@@ -22,11 +23,12 @@
                     default: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
                 }
             }//根据uid奇偶切换版本
-
-            function sendkey(keycode){
+            function sendkey(keycode) {
                 $.get('http://bwinput.s.gerhut.me/input?name=' + uname + '&key=' + keycode);
             }//发送按键
-            
+            function sendmouse(x, y) {
+                if(x>=0&&y>=0)$.get('http://bwinput.s.gerhut.me/input?name=' + uname + '&touch=' + x + ',' + y);
+            }//发送鼠标
             function sendmessage() {
                 var message = $('#chat input')
                 if (message.val() != '' && message.val.length <= 40) {
@@ -34,14 +36,12 @@
                     message.val('');
                 }
             }//发送聊天
-
             function refresh() {
                 $(screen).ready(function () {
-                    screen.attr('src', gameurl);
+                    screen.attr('src', gameurl + '?' + Date.now());
                 })
                 setTimeout(refresh, rate);
             }//刷新游戏屏幕
-
             function refreshchat() {
                 $(chatrecord).ready(function () {
                     chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))) });
@@ -60,14 +60,17 @@
                 refresh();
                 refreshchat();
                 refreshkey();
-                $('#chat button').click(function () {
+                btnchat.click(function () {
                     sendmessage();
                 })
-                $('#chat input').keypress(function (e) {
+                txtchat.keypress(function (e) {
                     if (e.which == 13) sendmessage();
                 })
-                $('#keypad button').click(function () {
+                btnkeypad.click(function () {
                     sendkey($(this).val())
+                })
+                screen.click(function () {
+                    sendmouse(Math.round(event.offsetX), Math.round(event.offsetY)-192);
                 })
             }//入口
 
@@ -125,11 +128,6 @@
 
                 <pre id="keyrecord"></pre>
             </div>
-
-
-
-
-
         </div>
         <br style="clear:both" />
     </div>
