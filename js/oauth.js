@@ -1,7 +1,7 @@
 (function () {
     var clientId = '3GMv3CfMcLTSOuHyffkwieIx';
   var oAuthUrl = [
-    'https://openapi.baidu.com/oauth/2.0/authorize?response_type=token',
+    ' ',
     'client_id=' + clientId,
     'redirect_uri=' + location.protocol + '//' + location.host
   ].join('&');
