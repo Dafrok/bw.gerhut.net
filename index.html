@@ -11,7 +11,7 @@
     <script>
         $(document).ready(function (data) {
             var uid = 0, uname = 'debug';//debug数据
-            var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 200, gameurl = switchversion(uid);//基本参数
+            var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 200, gameurl;//基本参数
             var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
             var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
 
@@ -26,6 +26,7 @@
                         { return document.write(data.error_msg); }
                         else {
                             recode(data)
+                            
                         }
                     });
                 }
@@ -43,7 +44,7 @@
                 if (location.hash.indexOf('access_token=') === -1)
                     return location.href = oAuthUrl;
             }//登陆
-            function recode(udata) { uid = udata.uid; uname = udata.uname; alert(uname);}//基本变量重赋值
+            function recode(udata) { uid = udata.uid; uname = udata.uname; gameurl = switchversion(uid); }//基本变量重赋值
             function switchversion(uid) {
                 switch (uid % 2) {
                     case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
