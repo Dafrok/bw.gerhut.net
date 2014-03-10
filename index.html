@@ -85,7 +85,7 @@
 
                             for (var i = touchlist.length - 1; i >= 0; i--) {
                                 if (touchlist[i].toString() != lasttouch.toString()) {
-                                    if (!lasttouch) { i = 0 }
+                                    if (!lasttouch) { i = 0; lasttouch = touchlist[touchlist.length - 1]; break;}
                                     var c;
                                     var name = decodeURIComponent(touchlist[i][1])
                                     var x = touchlist[i][2]
@@ -104,7 +104,7 @@
                                 }
                             }
                         }
-                        console.log(lasttouch);
+                        //console.log(lasttouch);
                         lasttouch = touchlist[touchlist.length - 1];
                     });
                 setTimeout(refreshtouch, rate);
