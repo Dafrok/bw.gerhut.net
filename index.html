@@ -10,12 +10,30 @@
     <script src="js/jquery.min.js"></script>
     <script>
         $(document).ready(function (data) {
-            var uid = 0, uname = '';//debug数据
+            var uid = 0, uname = 'debug';//debug数据
 
             var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 200, gameurl = switchversion(uid);//基本参数
             var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
             var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
 
+            function auth() {
+                if (uid) {
+                    var accessToken = location.hash.substr(location.hash.indexOf('access_token='));
+                    accessToken = accessToken.substr(0, accessToken.indexOf('&'));
+                    var restUrl = 'https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?' + accessToken + '&callback=?'
+
+                    $.getJSON(restUrl).done(function (data) {
+                        if ('error_msg' in data)
+                        { return document.write(data.error_msg); }
+                        else {
+                            recode(data)
+                        }
+                    });
+                }
+                else {
+                    login();
+                }
+            }//认证
             function login() {
 
                 var oAuthUrl = [
@@ -25,28 +43,8 @@
                 ].join('&');
                 if (location.hash.indexOf('access_token=') === -1)
                     return location.href = oAuthUrl;
-                
-
             }//登陆
-
-            function auth() {
-                if (uid) {
-                    var accessToken = location.hash.substr(location.hash.indexOf('access_token='));
-                    accessToken = accessToken.substr(0, accessToken.indexOf('&'));
-                    var restUrl = 'https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?' + accessToken + '&callback=?'
-                    
-                    $.getJSON(restUrl).done(function (data) {
-                        if ('error_msg' in data)
-                            return document.write(data.error_msg);
-                        uname = data.uname
-                        uid = data.uid
-                    });
-                }
-                else {
-                    login();
-                }
-            }//认证
-
+            function recode(udata) { uid = udata.uid; uname = udata.uname; alert(uname);}//基本变量重赋值
             function switchversion(uid) {
                 switch (uid % 2) {
                     case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
@@ -86,7 +84,6 @@
                 })
                 setTimeout(refreshchat, rate);
             }//刷新按键记录
-
             function init() {
                 auth();
                 refresh();
@@ -157,7 +154,6 @@
             <div id="chat">
                 <input /><button>send</button>
                 <pre id="chatrecord"></pre>
-
                 <pre id="keyrecord"></pre>
             </div>
         </div>
