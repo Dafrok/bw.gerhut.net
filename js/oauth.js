@@ -1,7 +1,7 @@
 (function () {
     var clientId = '3GMv3CfMcLTSOuHyffkwieIx';
   var oAuthUrl = [
-    ' ',
+    '',
     'client_id=' + clientId,
     'redirect_uri=' + location.protocol + '//' + location.host
   ].join('&');

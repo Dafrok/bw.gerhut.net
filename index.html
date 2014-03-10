@@ -17,8 +17,9 @@
             var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
             
             function login() {
+                
                 var oAuthUrl = [
-                  ' ',
+                  'https://openapi.baidu.com/oauth/2.0/authorize?response_type=token',
                   'client_id=' + clientId,
                   'redirect_uri=' + location.protocol + '//' + location.host
                 ].join('&');
@@ -29,6 +30,7 @@
                 var accessToken = location.hash.substr(
                   location.hash.indexOf('access_token='));
                 accessToken = accessToken.substr(0, accessToken.indexOf('&'));
+                
                 
             }//登陆认证
             
