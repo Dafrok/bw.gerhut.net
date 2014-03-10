@@ -16,7 +16,6 @@
             var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
 
             function login() {
-
                 var oAuthUrl = [
                   'https://openapi.baidu.com/oauth/2.0/authorize?response_type=token',
                   'client_id=' + clientId,
@@ -40,9 +39,9 @@
             function recode(udata) { uid = udata.uid; uname = udata.uname; gameurl = switchversion(uid); }//基本变量重赋值
             function switchversion(uid) {
                 switch (uid % 2) {
-                    case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
-                    case 1: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
-                    default: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
+                    case 0: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
+                    case 1: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
+                    default: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
                 }
             }//根据uid奇偶切换版本
             function sendkey(keycode) {
@@ -77,6 +76,9 @@
                 })
                 setTimeout(refreshkey, rate);
             }//刷新按键记录
+            function refreshtouch() {
+                $()
+            }
             function init() {
                 login();
                 refresh();
