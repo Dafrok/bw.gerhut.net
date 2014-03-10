@@ -53,10 +53,10 @@
                 }
             }//根据uid奇偶切换版本
             function sendkey(keycode) {
-                $.get('http://bwinput.s.gerhut.me/input?name=' + uname + '&key=' + keycode);
+                $.get('http://bwinput.s.gerhut.me/key/input?name=' + uname + '&key=' + keycode);
             }//发送按键
             function sendmouse(x, y) {
-                if (x >= 0 && y >= 0) $.get('http://bwinput.s.gerhut.me/input?name=' + uname + '&touch=' + x + ',' + y);
+                if (x >= 0 && y >= 0) $.get('http://bwinput.s.gerhut.me/touch/input?name=' + uname + '&touch=' + x + ',' + y);
             }//发送鼠标
             function sendmessage() {
                 var message = $('#chat input')
