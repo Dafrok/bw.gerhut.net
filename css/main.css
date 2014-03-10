@@ -27,6 +27,27 @@
     background: linear-gradient(to top,#000,#fff);
 }
 
+#screen {
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+}
+    #screen > span {
+    text-align:center;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    white-space: nowrap;
+    position:absolute;
+    cursor:pointer;
+    color:white;
+    text-shadow:1px 1px 1px red;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select:none;
+    }
+
 #chat {
     width: 100%;
 }

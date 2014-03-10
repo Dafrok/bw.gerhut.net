@@ -10,8 +10,9 @@
     <script src="js/jquery.min.js"></script>
     <script>
         $(document).ready(function (data) {
-            var uid = 0, uname = 'debug';//debug数据
+            var uid = 0, uname = 'debug';//debug参数
             var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 200, gameurl;//基本参数
+            var touchlist = 0, lasttouch = 0;//基本变量
             var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
             var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
 
@@ -77,13 +78,44 @@
                 setTimeout(refreshkey, rate);
             }//刷新按键记录
             function refreshtouch() {
-                $()
+                $.get('http://bwinput.s.gerhut.me/touch',
+                    function (touch) {
+                        touchlist = $.parseJSON('[' + touch.substr(0, touch.length - 3) + ']');
+                        if (touchlist.length) {
+
+                            for (var i = touchlist.length - 1; i >= 0; i--) {
+                                if (touchlist[i].toString() != lasttouch.toString()) {
+                                    if (!lasttouch) { i = 0 }
+                                    var c;
+                                    var name = decodeURIComponent(touchlist[i][1])
+                                    var x = touchlist[i][2]
+                                    var y = touchlist[i][3]
+                                    $("#screen").append(
+                                        $("<span>").text(name).css({
+                                            'top': y + 192,
+                                            'left': x
+                                        }).fadeIn(400).fadeOut(400, function () {
+                                            $(this).remove()[0]
+                                        })
+                                    );
+                                }
+                                else {
+                                    break;
+                                }
+                            }
+                        }
+                        console.log(lasttouch);
+                        lasttouch = touchlist[touchlist.length - 1];
+                    });
+                setTimeout(refreshtouch, rate);
             }
+
             function init() {
                 login();
                 refresh();
                 refreshchat();
                 refreshkey();
+                refreshtouch();
                 btnchat.click(function () {
                     sendmessage();
                 })
