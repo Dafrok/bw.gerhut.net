@@ -25,6 +25,7 @@
                 ].join('&');
                 if (location.hash.indexOf('access_token=') === -1)
                     return location.href = oAuthUrl;
+                
 
             }//登陆
 
@@ -37,7 +38,8 @@
                     $.getJSON(restUrl).done(function (data) {
                         if ('error_msg' in data)
                             return document.write(data.error_msg);
-                        alert(data);
+                        uname = data.uname
+                        uid = data.uid
                     });
                 }
                 else {
