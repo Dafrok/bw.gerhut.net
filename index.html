@@ -39,9 +39,9 @@
             function recode(udata) { uid = udata.uid; uname = udata.uname; gameurl = switchversion(uid); }//基本变量重赋值
             function switchversion(uid) {
                 switch (uid % 2) {
-                    case 0: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
-                    case 1: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
-                    default: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
+                    case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
+                    case 1: gameurl = 'http://white.s.gerhut.me/'; return gameurl;
+                    default: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
                 }
             }//根据uid奇偶切换版本
             function sendkey(keycode) {
