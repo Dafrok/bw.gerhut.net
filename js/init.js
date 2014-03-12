@@ -4,7 +4,7 @@
     var touchlist = 0, lasttouch = 0;//基本变量
     var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
     var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
-    console.log(uid);
+
     function login() {
         var oAuthUrl = [
           'https://openapi.baidu.com/oauth/2.0/authorize?response_type=token',
@@ -17,7 +17,7 @@
         var accessToken = location.hash.substr(location.hash.indexOf('access_token='));
         accessToken = accessToken.substr(0, accessToken.indexOf('&'));
         var restUrl = 'https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?' + accessToken + '&callback=?'
-
+        
         $.getJSON(restUrl).done(function (data) {
             if ('error_msg' in data)
             { return document.write(data.error_msg); }
@@ -25,8 +25,13 @@
                 recode(data);
             }
         });
+        console.log(uid);
     }//登录认证
-    function recode(udata) { uid = udata.uid; uname = udata.uname; gameurl = switchversion(uid);  }//基本变量重赋值
+    function recode(udata) {
+        uid = udata.uid;
+        uname = udata.uname;
+        gameurl = switchversion(uid);
+    }//基本变量重赋值
     function switchversion(uid) {
         switch (uid % 2) {
             case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
@@ -48,7 +53,7 @@
         }
     }//发送聊天
     function refresh() {
-        $(screen).load( gameurl + '?' + Date.now(), function () { setTimeout(refresh, rate); });
+        $(screen).load(gameurl + '?' + Date.now(), function () { setTimeout(refresh, rate); });
     }//刷新游戏屏幕
     function refreshchat() {
         chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
