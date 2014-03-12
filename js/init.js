@@ -48,23 +48,17 @@
         }
     }//发送聊天
     function refresh() {
-        $(screen).ready(function () {
-            screen.attr('src', gameurl + '?' + Date.now());
-        })
-        setTimeout(refresh, rate);
+        $(screen).load(gameurl + '?' + Date.now(), function () { setTimeout(refresh, rate); });
+
     }//刷新游戏屏幕
     function refreshchat() {
-        $(chatrecord).ready(function () {
-            chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))) });
+        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
 
-        })
-        setTimeout(refreshchat, rate);
     }//刷新聊天记录
     function refreshkey() {
-        $(keyrecord).ready(function () {
-            keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))) });
-        })
-        setTimeout(refreshkey, rate);
+        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshkey, rate); });
+
+
     }//刷新按键记录
     function refreshtouch() {
         $.get('http://bwinput.s.gerhut.me/touch',
@@ -97,7 +91,7 @@
                 lasttouch = touchlist[touchlist.length - 1];
             });
         setTimeout(refreshtouch, rate);
-    }
+    }//刷新屏幕记录
 
     function init() {
         login();
