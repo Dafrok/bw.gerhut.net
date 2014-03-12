@@ -100,7 +100,7 @@
     }//刷新屏幕记录
 
     function init() {
-        //login();
+        login();
         refresh();
         refreshchat();
         refreshkey();
