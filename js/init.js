@@ -1,6 +1,6 @@
 ﻿$(document).ready(function (data) {
     var uid = 0, uname = 'debug';//debug参数
-    var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 1000, gameurl;//基本参数
+    var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 250, gameurl;//基本参数
     var touchlist = 0, lasttouch = 0;//基本变量
     var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
     var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
@@ -25,7 +25,6 @@
                 recode(data);
             }
         });
-        console.log(uid);
     }//登录认证
     function recode(udata) {
         uid = udata.uid;
