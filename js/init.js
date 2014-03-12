@@ -17,7 +17,7 @@
         var accessToken = location.hash.substr(location.hash.indexOf('access_token='));
         accessToken = accessToken.substr(0, accessToken.indexOf('&'));
         var restUrl = 'https://openapi.baidu.com/rest/2.0/passport/users/getLoggedInUser?' + accessToken + '&callback=?'
-        
+
         $.getJSON(restUrl).done(function (data) {
             if ('error_msg' in data)
             { return document.write(data.error_msg); }
@@ -53,9 +53,12 @@
         }
     }//发送聊天
     function refresh() {
-        $(screen).load(gameurl + '?' + Date.now(), function () { setTimeout(refresh, rate); });
+        $(screen).load(function () {
+            setTimeout(function () { screen.attr('src', gameurl + '?' + Date.now()); }, rate);
+        })
     }//刷新游戏屏幕
     function refreshchat() {
+
         chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
 
     }//刷新聊天记录
