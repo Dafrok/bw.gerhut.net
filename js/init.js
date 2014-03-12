@@ -1,6 +1,6 @@
 ﻿$(document).ready(function (data) {
     var uid = 0, uname = 'debug';//debug参数
-    var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 200, gameurl;//基本参数
+    var clientId = '3GMv3CfMcLTSOuHyffkwieIx', rate = 1000, gameurl;//基本参数
     var touchlist = 0, lasttouch = 0;//基本变量
     var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
     var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
@@ -62,7 +62,7 @@
         chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
 
     }//刷新聊天记录
-    function refreshkey() {
+    function refreshkey() { 
         keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshkey, rate); });
     }//刷新按键记录
     function refreshtouch() {
