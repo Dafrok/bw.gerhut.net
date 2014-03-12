@@ -4,7 +4,7 @@
     var touchlist = 0, lasttouch = 0;//基本变量
     var screen = $('#screen img'), chatrecord = $('#chatrecord'), keyrecord = $('#keyrecord');//基本元素
     var btnchat = $('#chat button'), txtchat = $('#chat input'), btnkeypad = $('#keypad button'); //互动元素
-
+    console.log(uid);
     function login() {
         var oAuthUrl = [
           'https://openapi.baidu.com/oauth/2.0/authorize?response_type=token',
@@ -22,7 +22,7 @@
             if ('error_msg' in data)
             { return document.write(data.error_msg); }
             else {
-                recode(data); console.log(uid);
+                recode(data);
             }
         });
     }//登录认证
@@ -48,7 +48,6 @@
         }
     }//发送聊天
     function refresh() {
-        
         $(screen).load( gameurl + '?' + Date.now(), function () { setTimeout(refresh, rate); });
     }//刷新游戏屏幕
     function refreshchat() {
