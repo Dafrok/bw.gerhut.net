@@ -131,6 +131,10 @@
     color: silver;
     background:black;
 }
+p {
+text-align:center;
+font-size:12px;
+}
 
 @media only screen and (min-width: 514px) {
     #container > div {
