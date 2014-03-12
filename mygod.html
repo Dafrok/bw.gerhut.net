@@ -1,6 +1,6 @@
 <!doctype html>
-<img src="http://black.s.gerhut.me/" data-src="http://black.s.gerhut.me/?" onload="load(event)">
-<img src="http://white.s.gerhut.me/" data-src="http://white.s.gerhut.me/?" onload="load(event)">
+<img src="http://black.s.gerhut.me/" data-src="http://black.s.gerhut.me/?" onload="load(event)" onerror="load(event)">
+<img src="http://white.s.gerhut.me/" data-src="http://white.s.gerhut.me/?" onload="load(event)" onerror="load(event)">
 <script>
 var imgs = Array.prototype.slice.call(document.getElementsByTagName('img'))
 function load(event) {
