@@ -53,7 +53,10 @@
         }
     }//发送聊天
     function refresh() {
+
         $(screen).load(function () {
+            setTimeout(function () { screen.attr('src', gameurl + '?' + Date.now()); }, rate);
+        }).error(function () {
             setTimeout(function () { screen.attr('src', gameurl + '?' + Date.now()); }, rate);
         })
     }//刷新游戏屏幕
@@ -62,7 +65,7 @@
         chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
 
     }//刷新聊天记录
-    function refreshkey() { 
+    function refreshkey() {
         keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshkey, rate); });
     }//刷新按键记录
     function refreshtouch() {
