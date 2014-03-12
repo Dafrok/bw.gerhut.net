@@ -22,11 +22,11 @@
             if ('error_msg' in data)
             { return document.write(data.error_msg); }
             else {
-                recode(data);
+                recode(data); console.log(uid);
             }
         });
     }//登录认证
-    function recode(udata) { uid = udata.uid; uname = udata.uname; gameurl = switchversion(uid); }//基本变量重赋值
+    function recode(udata) { uid = udata.uid; uname = udata.uname; gameurl = switchversion(uid);  }//基本变量重赋值
     function switchversion(uid) {
         switch (uid % 2) {
             case 0: gameurl = 'http://black.s.gerhut.me/'; return gameurl;
@@ -48,14 +48,15 @@
         }
     }//发送聊天
     function refresh() {
-        $(screen).load(gameurl + '?' + Date.now(), function () { /*setTimeout(refresh, rate);*/ });
+        
+        $(screen).load( gameurl + '?' + Date.now(), function () { setTimeout(refresh, rate); });
     }//刷新游戏屏幕
     function refreshchat() {
-        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); /*setTimeout(refreshchat, rate);*/ });
+        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
 
     }//刷新聊天记录
     function refreshkey() {
-        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); /*setTimeout(refreshkey, rate);*/ });
+        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshkey, rate); });
     }//刷新按键记录
     function refreshtouch() {
         $.get('http://bwinput.s.gerhut.me/touch',
@@ -84,18 +85,17 @@
                         }
                     }
                 }
-                //console.log(lasttouch);
                 lasttouch = touchlist[touchlist.length - 1];
             });
         setTimeout(refreshtouch, rate);
     }//刷新屏幕记录
 
     function init() {
-        login();
+        //login();
         refresh();
         refreshchat();
         refreshkey();
-        refreshtouch();
+        //refreshtouch();
         btnchat.click(function () {
             sendmessage();
         })
