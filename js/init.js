@@ -65,7 +65,7 @@
 
     }//刷新聊天记录
     function refreshkey() {
-        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshkey, rate); });
+        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n')).replace(/\x/g, '%')); setTimeout(refreshkey, rate); });
     }//刷新按键记录
     function refreshtouch() {
         $.get('http://bwinput.s.gerhut.me/touch',
