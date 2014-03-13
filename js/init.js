@@ -61,7 +61,7 @@
     }//刷新游戏屏幕
     function refreshchat() {
 
-        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n')).replace(/\\x/g, '%')); setTimeout(refreshchat, rate); });
+        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
 
     }//刷新聊天记录
     function refreshkey() {
