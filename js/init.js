@@ -61,11 +61,11 @@
     }//刷新游戏屏幕
     function refreshchat() {
 
-        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshchat, rate); });
+        chatrecord.load('http://bwinput.s.gerhut.me/chat', function () { chatrecord.text(decodeURIComponent(chatrecord.text().split('\n').reverse().join('\n')).replace(/\\x/g, '%')); setTimeout(refreshchat, rate); });
 
     }//刷新聊天记录
     function refreshkey() {
-        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n')).replace(/\\x/g, '%')); setTimeout(refreshkey, rate); });
+        keyrecord.load('http://bwinput.s.gerhut.me/key', function () { keyrecord.text(decodeURIComponent(keyrecord.text().split('\n').reverse().join('\n'))); setTimeout(refreshkey, rate); });
     }//刷新按键记录
     function refreshtouch() {
         $.get('http://bwinput.s.gerhut.me/touch',
